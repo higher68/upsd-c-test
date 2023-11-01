@@ -1,9 +1,10 @@
-import { Body, Controller, Post } from '@nestjs/common';
+import { Body, Controller, Get, Post } from '@nestjs/common';
 import { InvoicesService } from './invoices.service';
 import { InvoiceStatus } from '@prisma/client';
 import { CreateInvoiceDto } from './dto/createInvoice.dto';
 import { PrismaService } from '../prisma/prisma.service';
 import { CONSUMPTION_TAX_RATE } from '../const/app-constants';
+import { ListInvoicesDto } from './dto/listInvoices.dto';
 
 @Controller()
 export class InvoicesController {
@@ -36,6 +37,23 @@ export class InvoicesController {
         company_uid: userMeta.company_uid,
         payment_amount: invoice.payment_amount,
         client_uid: invoice.client_uid,
+      },
+    });
+    return result;
+  }
+  @Get('/app/invoices')
+  async getInvoices(@Body() listInvoicesDto: ListInvoicesDto) {
+    // TODO 後で認証機構を追加したら実装
+    const userMeta = {
+      company_uid: 'xxx',
+    };
+    const result = await this.prisma.invoiceData.findMany({
+      where: {
+        company_uid: userMeta.company_uid,
+        payment_due_date: {
+          gte: listInvoicesDto.start_date,
+          lte: listInvoicesDto.end_date,
+        },
       },
     });
     return result;
