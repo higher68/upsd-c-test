@@ -46,7 +46,7 @@ export class InvoicesController {
   async getInvoices(@Body() listInvoicesDto: ListInvoicesDto) {
     // TODO 後で認証機構を追加したら実装
     const userMeta = {
-      company_uid: 'xxx',
+      company_uid: '0dab39b7-5dbf-4890-8b7d-39f689f19f1f',
     };
     const result = await this.prisma.invoiceData.findMany({
       where: {
