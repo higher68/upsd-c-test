@@ -1,7 +1,7 @@
 import { Body, Controller, Post } from '@nestjs/common';
 import { InvoicesService } from './invoices.service';
 import { InvoiceStatus } from '@prisma/client';
-import { CreateInvoiceDto } from './dto/createInvoice.dts';
+import { CreateInvoiceDto } from './dto/createInvoice.dto';
 import { PrismaService } from '../prisma/prisma.service';
 import { CONSUMPTION_TAX_RATE } from '../const/app-constants';
 

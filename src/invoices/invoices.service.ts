@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { CreateInvoiceDto } from './dto/createInvoice.dts';
+import { CreateInvoiceDto } from './dto/createInvoice.dto';
 import { CONSUMPTION_TAX_RATE } from '../const/app-constants';
 
 @Injectable()
