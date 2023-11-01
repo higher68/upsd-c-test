@@ -131,3 +131,10 @@ enum InvoiceStatus {
   // エラー
   ERROR
 }
+
+generator erd {
+  provider                  = "prisma-erd-generator"
+  theme                     = "forest"
+  output                    = "ERD.md"
+  includeRelationFromFields = true
+}

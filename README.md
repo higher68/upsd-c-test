@@ -14,8 +14,6 @@
 $ asdf install
 ```
 
-
-
 ### インストール
 
 ```bash
@@ -48,6 +46,18 @@ $ npm run test:e2e
 $ npm run test:cov
 ```
 
+#### DB周り
+
+```shell
+# localでdb起動
+docker-compose up -d
+# prisma配下に[ER図](prisma/ERD.md)出力
+$ npm run erd:generate
+# prisma初期化
+npx dotenv -e .env.local -- npx prisma migrate dev --name test 
+```
+
 ### Tips
 
 - アプリ起動時、/apiでswagger uiが起動する
+
