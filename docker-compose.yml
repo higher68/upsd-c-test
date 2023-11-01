@@ -1,0 +1,16 @@
+version: "3"
+services:
+  db:
+    platform: linux/x86_64
+    image: mysql:8
+    ports:
+      - 13306:3306
+    #    volumes:
+    #      - db-store:/var/lib/mysql
+    container_name: test-db
+    environment:
+      - MYSQL_DATABASE=test
+      - MYSQL_USER=user
+      - MYSQL_PASSWORD=password
+      - MYSQL_ROOT_PASSWORD=password
+      - TZ="Asia/Tokyo"

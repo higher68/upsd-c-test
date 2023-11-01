@@ -1,0 +1,140 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+// 企業
+model Company {
+  // 法人Unique Id
+  company_uid         String        @id @default(uuid())
+  // 法人名
+  corporate_name      String
+  // 代表者名
+  representative_name String
+  // 電話番号
+  phone_number        String
+  // 郵便番号
+  postal_code         String
+  // 住所
+  address             String
+  // 所属ユーザー
+  users               User[]
+  // 取引先
+  clients             Client[]
+  // 請求
+  invoices            InvoiceData[]
+}
+
+// ユーザー
+model User {
+  // ユーザーのunique id
+  user_uid    String  @id @default(uuid())
+  // ユーザー名
+  name        String
+  // ユーザーのemal address
+  email       String  @unique
+  // NOTE 実際はhashが入るので実装時考慮すること
+  // ユーザーパスワード
+  password    String
+  // 所属企業
+  company     Company @relation(fields: [company_uid], references: [company_uid])
+  // 所属企業id
+  company_uid String
+}
+
+// 取引先　
+model Client {
+  // 取引先unique id
+  client_uid          String              @id @default(uuid())
+  // 法人名
+  corporate_name      String
+  // 代表者名
+  representative_name String
+  // 電話番号　
+  phone_number        String
+  // 郵便番号　
+  postal_code         String
+  // 住所
+  address             String
+  // 取引先を持つ会社
+  company             Company             @relation(fields: [company_uid], references: [company_uid])
+  // 取引先を所有する会社のuid
+  company_uid         String
+  // 取引先講座
+  bankAccounts        ClientBankAccount[]
+  // 請求データ
+  invoices            InvoiceData[]
+}
+
+// 取引先銀行口座
+model ClientBankAccount {
+  // 取引先口座のid
+  account_id     Int    @id @default(autoincrement())
+  // 取引先
+  client         Client @relation(fields: [client_uid], references: [client_uid])
+  // 取引先のuid
+  client_uid     String
+  // 口座名
+  bank_name      String
+  // 支店名
+  branch_name    String
+  // 口座番号　
+  account_number String
+  // 口座名
+  account_name   String
+}
+
+// 請求
+model InvoiceData {
+  // 請求のid
+  invoice_id           Int           @id @default(autoincrement())
+  // 発行日
+  issue_date           DateTime
+  // 支払金額　
+  payment_amount       Float
+  // 手数料
+  fee                  Float
+  // 手数料率
+  fee_rate             Float
+  // 消費税
+  consumption_tax      Float
+  // 消費税率
+  consumption_tax_rate Float
+  // 請求金額
+  invoice_amount       Float
+  // 支払い期日　
+  payment_due_date     DateTime
+  // 請求の状態
+  status               InvoiceStatus
+  // 会社
+  company              Company       @relation(fields: [company_uid], references: [company_uid])
+  // 会社のuid
+  company_uid          String
+  // 取引先
+  client               Client        @relation(fields: [client_uid], references: [client_uid])
+  // 取引先uid
+  client_uid           String
+}
+
+// 請求の状態
+enum InvoiceStatus {
+  // 未処理
+  UNPROCESSED
+  // 処理中
+  IN_PROGRESS
+  // 支払い済み
+  PAID
+  // エラー
+  ERROR
+}
+
+generator erd {
+  provider                  = "prisma-erd-generator"
+  theme                     = "forest"
+  output                    = "ERD.md"
+  includeRelationFromFields = true
+}
