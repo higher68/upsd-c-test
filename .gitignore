@@ -19,7 +19,8 @@ lerna-debug.log*
 /.nyc_output
 
 # IDEs and editors
-/.idea
+# NOTE .idea内に.gitignoreが独自で組み込まれているので、ここでは宣言しない
+#/.idea
 .project
 .classpath
 .c9/
