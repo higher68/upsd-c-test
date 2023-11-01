@@ -1,5 +1,10 @@
 # upsd-c-test
 
+## 仕様
+
+- APIのFrameWorkはNestJS
+- linterはeslint, husky+lint-stagedでcommit時にcodeがfixされる
+
 ## 運用
 
 ### インストール
@@ -33,3 +38,7 @@ $ npm run test:e2e
 # test coverage
 $ npm run test:cov
 ```
+
+### Tips
+
+- アプリ起動時、/apiでswagger uiが起動する
