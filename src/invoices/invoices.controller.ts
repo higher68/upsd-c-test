@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Post } from '@nestjs/common';
+import { Body, Controller, Get, HttpCode, Post } from '@nestjs/common';
 import { InvoicesService } from './invoices.service';
 import { InvoiceStatus } from '@prisma/client';
 import { CreateInvoiceDto } from './dto/createInvoice.dto';
@@ -14,10 +14,11 @@ export class InvoicesController {
   ) {}
 
   @Post('/app/invoices')
+  @HttpCode(200)
   async postInvoice(@Body() invoice: CreateInvoiceDto) {
     // TODO 後で認証機構を追加したら実装
     const userMeta = {
-      company_uid: 'xxx',
+      company_uid: '0dab39b7-5dbf-4890-8b7d-39f689f19f1f',
     };
     const today = new Date();
     const invoice_amount = this.invoiceService.createInvoiceAmount(invoice);
@@ -45,7 +46,7 @@ export class InvoicesController {
   async getInvoices(@Body() listInvoicesDto: ListInvoicesDto) {
     // TODO 後で認証機構を追加したら実装
     const userMeta = {
-      company_uid: 'xxx',
+      company_uid: '0dab39b7-5dbf-4890-8b7d-39f689f19f1f',
     };
     const result = await this.prisma.invoiceData.findMany({
       where: {
