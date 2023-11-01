@@ -4,8 +4,17 @@
 
 - APIのFrameWorkはNestJS
 - linterはeslint, husky+lint-stagedでcommit時にcodeがfixされる
+- tool管理にはasdfを使っている
 
 ## 運用
+
+### 必要package install(asdfがinstallされている前提)
+
+```shell
+$ asdf install
+```
+
+
 
 ### インストール
 
