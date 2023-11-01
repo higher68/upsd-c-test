@@ -1,14 +1,14 @@
 import { Body, Controller, Post } from '@nestjs/common';
-import { InvoiceService } from './invoice.service';
+import { InvoicesService } from './invoices.service';
 import { InvoiceStatus } from '@prisma/client';
 import { CreateInvoiceDto } from './dto/createInvoice.dts';
 import { PrismaService } from '../prisma/prisma.service';
 import { CONSUMPTION_TAX_RATE } from '../const/app-constants';
 
 @Controller()
-export class InvoiceController {
+export class InvoicesController {
   constructor(
-    private readonly invoiceService: InvoiceService,
+    private readonly invoiceService: InvoicesService,
     private prisma: PrismaService,
   ) {}
 

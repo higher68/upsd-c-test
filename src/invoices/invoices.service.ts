@@ -3,7 +3,7 @@ import { CreateInvoiceDto } from './dto/createInvoice.dts';
 import { CONSUMPTION_TAX_RATE } from '../const/app-constants';
 
 @Injectable()
-export class InvoiceService {
+export class InvoicesService {
   createInvoiceAmount(invoice: CreateInvoiceDto): number {
     return (
       invoice.payment_amount *
