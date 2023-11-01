@@ -1,6 +1,20 @@
 # upsd-c-test
 
+## 仕様
+
+- APIのFrameWorkはNestJS
+- linterはeslint, husky+lint-stagedでcommit時にcodeがfixされる
+- tool管理にはasdfを使っている
+
 ## 運用
+
+### 必要package install(asdfがinstallされている前提)
+
+```shell
+$ asdf install
+```
+
+
 
 ### インストール
 
@@ -33,3 +47,7 @@ $ npm run test:e2e
 # test coverage
 $ npm run test:cov
 ```
+
+### Tips
+
+- アプリ起動時、/apiでswagger uiが起動する
